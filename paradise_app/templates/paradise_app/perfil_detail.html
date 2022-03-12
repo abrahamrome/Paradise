@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'paradise_app/css/post.css' %}" crossorigin="anonymous">
+{% endblock %}
+
+
+
+
+{% block content %}
+<br><br><br><br>
+    <center>
+
+        <div class="col-lg-4">
+            <rect width="100%" height="100%" fill="#777"><img src="/media/{{ object.foto }}" class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140">
+
+            <h2>{{ object.usuario }}</h2>
+            <p>{{ object.biografia }}</p>
+            
+      </div>
+    </center>
+   
+    <center><span class="space"><a href="{% url 'Post' perfil.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Publicaciones</button></a> <a href="{% url 'Album' %}"><button type="button" class="btn btn-sm btn-outline-secondary">Albumnes</button></a></span>
+    
+    
+   
+
+  
+
+
+
+
+
+
+
+
+
+
+
+           <!-- <li>Descripcion: {{ post.object. }}</li>
+            
+            <li>Posts: {{ object.usuario.post_set.count }}</li>
+            <li>Comentarios realizados: {{ object.usuario.comentarios_set.count }}</li>
+            <li>Valoraciones dadas: {{ object.usuario.valoracion_set.count }} </li>
+            <li>Albumes: {{ object.usuario.album_set.count }}
+
+        
+    </ul>
+    <ul>
+        {% if user.is_staff %}
+         <li><a href="{% url 'Perfil-update' perfil.pk %}">Modificar</a></li>
+         <li><a href="{% url 'Perfil-delete' perfil.pk %}">Borrar</a></li>
+        {% else %}
+            {% if user == perfil.user %}
+                <li><a href="{% url 'Perfil-update' perfil.pk %}">Modificar</a></li>
+                <li><a href="{% url 'Perfil-delete' perfil.pk %}">Borrar</a></li>
+            {% endif %}
+        {% endif %}
+
+    </ul>-->
+{% endblock %}

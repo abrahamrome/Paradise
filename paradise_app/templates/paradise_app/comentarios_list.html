@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+    <h2>Comentarios</h2>
+    <ul>
+        {% for comentarios in object_list%}
+            {% if  %}
+            <li>{{comentarios.perfil}}: {{comentarios.coment}}</li>
+            }
+
+        {% endfor %}
+    </ul>
+    <!--{% if user.is_authenticated %}
+    <li><a href="{% url 'Comentarios-create' %}">Añadir</a></li>
+    {% endif %}-->
+{% endblock %}

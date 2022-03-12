@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+    <h1>Valoracion de {{ object.user }}</h1>
+    <ul>
+            <li>{{ object.foto }}: {{ object.estrella}}</li>
+        
+    </ul>
+    <ul>
+        {% if user.is_staff %}
+         <li><a href="{% url 'Valoracion-update' Valoracion.pk %}">Modificar</a></li>
+         <li><a href="{% url 'Valoracion-delete' Valoracion.pk %}">Borrar</a></li>
+        {% else %}
+            {% if user == Valoracion.user.user %}
+                <li><a href="{% url 'Valoracion-update' Valoracion.pk %}">Modificar</a></li>
+                <li><a href="{% url 'Valoracion-delete' Valoracion.pk %}">Borrar</a></li>
+            {% endif %}
+        {% endif %}
+
+    </ul>
+{% endblock %}

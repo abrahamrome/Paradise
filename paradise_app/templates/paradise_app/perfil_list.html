@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+
+    <h2>Perfiles</h2>
+    <ul>
+        {% for perfil in object_list %}
+            <li><a href="{% url 'Perfil-detalles' perfil.pk %}">{{ perfil.user }}</a></li>
+        {% endfor %}
+    </ul>
+    {% if user.is_staff%}
+        <li><a href="{% url 'Perfil-create' %}">Añadir</a></li>
+    {% endif %}
+{% endblock %}

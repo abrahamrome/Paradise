@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+    <h1>Comentarios de {{ object.user }}</h1>
+    <ul>
+            <li> {{ object.coment}} ({{ object.post }})</li>
+        
+    </ul>
+    <ul>
+        {% if user.is_staff %}
+         <li><a href="{% url 'Comentarios-update' comentarios.pk %}">Modificar</a></li>
+         <li><a href="{% url 'Comentarios-delete' comentarios.pk %}">Borrar</a></li>
+        {% else %}
+            {% if user == comentarios.perfil.user %}
+                <li><a href="{% url 'Comentarios-update' comentarios.pk %}">Modificar</a></li>
+                <li><a href="{% url 'Comentarios-delete' comentarios.pk %}">Borrar</a></li>
+            {% endif %}
+        {% endif %}
+
+    </ul>
+{% endblock %}

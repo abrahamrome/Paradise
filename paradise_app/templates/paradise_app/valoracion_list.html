@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+    <h2>Valoraciones</h2>
+    <ul>
+        {% for valoracion in object_list %}
+            <li><a href="{% url 'Valoracion-detalles' valoracion.pk %}">{{ valoracion.tit }}</a></li>
+        {% endfor %}
+    </ul>
+    <!--{% if user.is_authenticated %}
+        <li><a href="{% url 'Valoracion-create' %}">Añadir</a></li>
+    {% endif %}-->
+{% endblock %}

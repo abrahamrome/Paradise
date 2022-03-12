@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'paradise_app/css/postinicio.css' %}" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+<!--<div class="container">
+  <div class="row">
+    <div class="col-md-12 search">
+      <form method="POST" action="{% url 'search' %}">
+        <div id="custom-search-input">
+          <div class="input-group col-md-12">
+            {% csrf_token %}
+            <input type="search" class="form-control" placeholder="Buscar..." name="buscar">
+            <span class="input-group-list">
+              <i class="icon icon-search"></i>
+              <button type="submit" class="boton btn-success">Buscar</button>
+            </span>
+            
+          </div>
+          
+        </div>
+
+      </form>
+      
+    </div>
+    
+  </div>
+</div>
+-->
+
+<style>
+  body {
+  background-image: url('../static/paradise_app/imagenes/98495-puesta-tropicos-sica-ilustracion-4500x3000.jpg');
+  background-repeat: no-repeat;
+  }
+
+</style>
+
+<br><br><br>
+<center>
+<h1 style="color:white">¡Bienvenidos a Paradise!</h1>
+
+	{% for post in posts_todos %}
+      <br>
+      <br>
+      <section>
+          <div class="wrapper">
+              <div class="left-col">
+                  <div class="post">
+                      <div class="info">
+                        <a href="">
+                          <div class="user">
+                              <div class="profile-pic"><img src="/media/{{ post.perfil.foto }}" alt=""></div>
+                              <p class="username">{{ post.perfil }}</p>
+                          </div>
+                        </a>
+                          <img src="img/option.PNG" class="options" alt="">
+                      </div>
+                      <img src="/media/{{ post.subir }}" class="post-image" alt="">
+                      <div class="post-content">
+                          <div class="reaction-wrapper">
+                              <img src="img/like.PNG" class="icon" alt="">
+                              <img src="img/comment.PNG" class="icon" alt="">
+                              <img src="img/send.PNG" class="icon" alt="">
+                              <img src="img/save.PNG" class="save icon" alt="">
+                          </div>
+                          <!--<p class="likes"></p>-->
+                          <p class="description"><span>{{ post.perfil }}</span>{{ post.descripcion }}</p>
+                          <p class="post-time">{{ post.time }}</p>
+                      </div>
+                      <div class="comment-wrapper">
+                          <img src="img/smile.PNG" class="icon" alt="">
+                          <input type="text" class="comment-box" placeholder="Añadir comentario">
+                          <button class="comment-btn">+</button>
+                      </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </section>
+  {% endfor %} 
+  </center>
+
+
+
+
+
+{% endblock %}

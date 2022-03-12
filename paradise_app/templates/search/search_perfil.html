@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<center>
+	{% if busqueda %}
+
+		<h1>Has buscado por {{ busqueda }}</h1> <br>
+
+		{% for perfil in p %}
+			<a href="{% url 'Perfil-detalles' perfil.pk %}">{{ perfil }}</a> <br>
+		{% endfor %}
+	{% else %}
+		<h1>No se ha podido encontrar el perfil que buscas...</h1>
+		<li><a href="{% url 'inicio' %}">Ir a inicio</a></li>
+	{% endif %}
+
+
+	</center>
+	
+{% endblock %}

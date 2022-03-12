@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'paradise_app/css/login.css' %}" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'paradise_app/css/font-awesome.css' %}" crossorigin="anonymous">
+{% endblock %}
+<head>
+    <style>
+        input::-webkit-input-placeholder {
+            color:white;
+        }
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: white;
+        }
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: white;
+        }
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: white;
+        }
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br>
+
+{% if form.errors %}
+<p>Tu usuario y contraseña son incorrectos. Intentelo de nuevo.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<body>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div id="login-box">
+            <h1>Login</h1>
+            <div class="form">
+                <div class="item">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    <input type="text" placeholder="username" name="username">
+                </div>
+
+                <div class="item">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <input type="password" placeholder="password" name="password">
+                </div>
+            </div>
+            <button type="submit">Login</button>
+            <p><a href="{% url 'password_reset' %}" style="color:white;">No me acuerdo de la contraseña</a></p>
+            <p><a href="{% url 'openid' %}" style="color:white">Utiliza una cuenta que ya tengas</a></p>
+        </div>
+
+    </form>
+</body>
+
+
+<!--<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="Entrar" action="{% url 'inicio' %}">
+<input type="hidden" name="next" value="{{ next }}">
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">No me acuerdo de la contraseña</a></p>-->
+
+{% endblock %}
