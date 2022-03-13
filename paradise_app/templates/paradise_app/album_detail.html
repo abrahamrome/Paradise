@@ -3,7 +3,6 @@
 {% block content %}
 <br><br><br>
     <h1>Album de {{ user }}</h1>
-    <li> Fecha de publicacion: {{ object.time }}</li>
    
             {% for foto in object.publications.all%}
             <div class="col">
@@ -13,8 +12,6 @@
                         <div class="card-body">
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                              <a href=""><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                              <a href=""><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
                             </div>
                         </div>
                     </div>
@@ -24,34 +21,7 @@
             
             
             {% endfor %}
-   
-    <ul>
-        {% if user.is_staff %}
-         <li><a href="{% url 'Albun-update' post.pk %}">Modificar</a></li>
-         <li><a href="{% url 'Album-delete' post.pk %}">Borrar</a></li>
-        {% else %}
-            {% if user == album.perfil.user %}
-                <li><a href="{% url 'Album-update' post.pk %}">Modificar</a></li>
-                <li><a href="{% url 'Album-delete' post.pk %}">Borrar</a></li>
-            {% endif %}
-        {% endif %}
 
-    </ul>
 {% endblock %}
 
 
-            <div class="col">
-                      <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="0" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><img src="/media/{{ foto.subir }}"></svg>
-
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                              <a href="{% url 'Post-detalles' post.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                              <a href="{% url 'post-update' post.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>

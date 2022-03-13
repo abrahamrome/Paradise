@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from paradise_app.forms import PerfilForm, PostForm, AlbumForm, ComentariosForm, ValoracionForm
@@ -40,18 +41,13 @@ class PerfilView(ListView):
 class PostView(ListView):
 	model = Post
 	
-	def get_queryset(self):
-		url=self.request.get_full_path()
-		urlcad=url.split('/')	
+	def get_queryset(self):			
 		queryset = super(PostView, self).get_queryset()
-		return queryset.filter(perfil_id=urlcad[3])
+		return queryset.filter(perfil_id=self.request.user.perfil.pk)
 
 class ComentariosView(LoginRequiredMixin, ListView):
 	model = Comentarios
-	def get_queryset(self):
-		queryset = super(ComentariosView, self).get_queryset()
-		return queryset.filter(post_id=Comentarios.pos)
-
+	
 
 class ValoracionView(LoginRequiredMixin, ListView):
 	model = Valoracion
@@ -105,7 +101,7 @@ class PerfilCreate(LoginRequiredMixin, CreateView):
 class PostCreate(LoginRequiredMixin, CreateView):
 	model = Post
 	fields = ['descripcion', 'subir']
-	success_url = reverse_lazy('inicio')
+	success_url = reverse_lazy('')
 	def form_valid(self, form):
 		form.instance.perfil = self.request.user.perfil
 		#form.instance.subir = 'imagenes/45399.jpg'
@@ -142,19 +138,13 @@ class ComentariosCreate(LoginRequiredMixin, CreateView):
 		form.save()
 		return redirect('Post-detalles', pk=urlcad[3])
 
-	"""def form_valid(self, form):
-        url=self.request.get_full_path()
-        urlcad=url.split("/")
-        objeto=Post.objects.get(pk=int(urlcad[3]))
-        form.instance.post = objeto
-        form.save()
-        return redirect('Post-detalles', pk=urlcad[3])"""
+
 	
 	
 
 class ValoracionCreate(LoginRequiredMixin, CreateView):
 	model = Valoracion
-	fields = ['foto', 'estrella']
+	fields = ['estrella']
 	#form_class = ValoracionForm
 	#success_url = reverse_lazy('Valoracion')
 	def form_valid(self, form):
@@ -162,9 +152,17 @@ class ValoracionCreate(LoginRequiredMixin, CreateView):
 		url=self.request.get_full_path()
 		urlcad=url.split('/')
 		objeto=Post.objects.get(pk=int(urlcad[3]))
+		print(objeto)
 		form.instance.post = objeto
 		form.save()
-		return redirect('Post-detalles', pk=urlcad[3])
+		"""li = Valoracion.objects.filter(perfil=self.request.user.perfil.pk, foto=objeto)
+		print(li)
+		
+		if len(li) == 0:
+			form.save()
+			return redirect('Post-detalles', pk=urlcad[3])
+		else:
+			raise PermissionDenied"""
 
 
 
@@ -264,7 +262,7 @@ def register(request):
 def search(request):
 	if request.method == "POST":
 		busqueda = request.POST['buscar']
-		p = Perfil.objects.filter(username__contains=busqueda)
+		p = User.objects.filter(username__contains=busqueda)
 
 		return render(request, 'search/search_perfil.html', {'busqueda':busqueda, 'p':p})
 	else:

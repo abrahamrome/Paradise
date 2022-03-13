@@ -84,15 +84,13 @@
                 <a class="nav-link" href="{% url 'Album-create' %}">+Album</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'Valoracion-create' %}">+Valoracion</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
               </li>
               {% endif %}
             </ul>
             <form class="d-flex" method="POST" action="{% url 'search' %}">
-              <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" name="buscar">
               <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
           </div>
@@ -199,7 +197,6 @@
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
             <li><a class="dropdown-item" href="{% url 'Post-create' %}">Nuevo Post</a></li>
             <li><a class="dropdown-item" href="{% url 'Album-create' %}">Nuevo album</a></li>
-            <li><a class="dropdown-item" href="{% url 'Valoracion-create' %}">Nueva valoración</a></li>
 
           </ul>
         </li>

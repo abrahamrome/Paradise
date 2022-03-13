@@ -105,7 +105,7 @@ urlpatterns = [
     path('valoracion/<int:pk>/detele', ValoracionDeleteView.as_view(), name='Valoracion-delete'),
     path('valoracion/<int:pk>/update', ValoracionUpdateView.as_view(), name='Valoracion-update'),
     path('valoraciones/', ValoracionView.as_view(), name='Valoracion'),
-    path('valoraciones/add', ValoracionCreate.as_view(), name='Valoracion-create'),
+    path('valoraciones/add/<int:pk>/', ValoracionCreate.as_view(), name='Valoracion-create'),
 
     path('album/<int:pk>/', AlbumDetailView.as_view(), name='Album-detalles'),
     path('album/<int:pk>/detele', AlbumDeleteView.as_view(), name='Album-delete'),
@@ -116,7 +116,7 @@ urlpatterns = [
     path('publicacion/<int:pk>/', PostDetailView.as_view(), name='Post-detalles'),
     path('publicacion/<int:pk>/delete', PostDeleteView.as_view(), name='post-delete'),
     path('publicacion/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
-    path('publicaciones/<int:pk>/', PostView.as_view(), name='Post'),
+    path('publicaciones/', PostView.as_view(), name='Post'),
     path('publicaciones/add', PostCreate.as_view(), name='Post-create'),
 
 
