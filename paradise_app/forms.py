@@ -39,7 +39,7 @@ class ComentariosForm(forms.ModelForm):
 class ValoracionForm(forms.ModelForm):
 	class Meta:
 		model = Valoracion
-		exclude =['perfil']
+		exclude =['perfil','foto']
 
 class RegistroPerfil(forms.ModelForm):
 

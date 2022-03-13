@@ -11,8 +11,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from paradise_app.forms import RegistroPerfil, RegistroUser
 from django.http import HttpResponseRedirect
-from django.db.models import Q
 from django.views.generic.base import TemplateResponseMixin
+from django.contrib.auth.models import User
 # Create your views here.
 
 #Vista de index.html
@@ -147,23 +147,31 @@ class ValoracionCreate(LoginRequiredMixin, CreateView):
 	fields = ['estrella']
 	#form_class = ValoracionForm
 	#success_url = reverse_lazy('Valoracion')
+	"""def form_valid(self, request):
+		valorar_form = ValoracionForm(request.POST)
+		if valorar_form.is_valid():
+			formulario = valorar_form.save(commit=False)
+			formulario.perfil = user.perfil
+			url=self.request.get_full_path()
+			urlcad=url.split('/')
+			objeto=Post.objects.get(pk=int(urlcad[3]))
+			formulario.post = objeto
+			valorar_form.save()
+			return redirect('Post-detalles', pk=urlcad[3])"""
 	def form_valid(self, form):
-		form.instance.perfil =self.request.user.perfil
 		url=self.request.get_full_path()
 		urlcad=url.split('/')
 		objeto=Post.objects.get(pk=int(urlcad[3]))
-		print(objeto)
-		form.instance.post = objeto
-		form.save()
-		"""li = Valoracion.objects.filter(perfil=self.request.user.perfil.pk, foto=objeto)
+		form.instance.foto = objeto
+		form.instance.perfil = self.request.user.perfil
+		li = Valoracion.objects.filter(perfil=self.request.user.perfil.pk, foto=objeto)
 		print(li)
 		
 		if len(li) == 0:
 			form.save()
 			return redirect('Post-detalles', pk=urlcad[3])
 		else:
-			raise PermissionDenied"""
-
+			raise PermissionDenied
 
 
 #------------------------------------------------------------------------------
