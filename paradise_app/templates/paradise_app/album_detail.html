@@ -2,7 +2,7 @@
 
 {% block content %}
 <br><br><br>
-    <h1>Album de {{ user }}</h1>
+    <h1>Album {{ object.nombre }}</h1>
    
             {% for foto in object.publications.all%}
             <div class="col">

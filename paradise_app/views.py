@@ -24,7 +24,7 @@ from django.contrib.auth.models import User
 def inicio (request):
 	
 	titulo = "Bienvenidos a Paradise"
-	posts_todos = Post.objects.order_by('?')[:4]
+	posts_todos = Post.objects.order_by('?')[:500]
 
 	context = {
 		'posts_todos': posts_todos
@@ -40,10 +40,17 @@ class PerfilView(ListView):
 
 class PostView(ListView):
 	model = Post
-	
+
+
 	def get_queryset(self):			
+		url=self.request.get_full_path()
+		urlcad=url.split('/')
+		print(urlcad)
 		queryset = super(PostView, self).get_queryset()
-		return queryset.filter(perfil_id=self.request.user.perfil.pk)
+		list= queryset.filter(perfil_id=urlcad[2])
+		return list
+
+
 
 class ComentariosView(LoginRequiredMixin, ListView):
 	model = Comentarios
@@ -54,15 +61,23 @@ class ValoracionView(LoginRequiredMixin, ListView):
 
 class AlbumView(LoginRequiredMixin,ListView):
 	model = Album
+	def get_queryset(self):			
+		url=self.request.get_full_path()
+		urlcad=url.split('/')
+		print(urlcad)
+		queryset = super(AlbumView, self).get_queryset()
+		list= queryset.filter(perfil_id=urlcad[2])
+		return list
 
 #------------------------------------------------------------------------------
 #Vistas detalles de modelos
 
 
-class PerfilDetailView(DetailView):
+class PerfilDetailView(LoginRequiredMixin, DetailView):
 	context_object_name = 'perfil'
 	queryset = Perfil.objects.all()
-	
+
+
 	
 	
 	
@@ -101,7 +116,7 @@ class PerfilCreate(LoginRequiredMixin, CreateView):
 class PostCreate(LoginRequiredMixin, CreateView):
 	model = Post
 	fields = ['descripcion', 'subir']
-	success_url = reverse_lazy('')
+	success_url = reverse_lazy('inicio')
 	def form_valid(self, form):
 		form.instance.perfil = self.request.user.perfil
 		#form.instance.subir = 'imagenes/45399.jpg'
@@ -113,7 +128,7 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
 	model = Album
 	#form_class = AlbumForm
 	fields = ['nombre', 'publications']
-	success_url = reverse_lazy('Album')
+	success_url = reverse_lazy('inicio')
 	def form_valid(self, form):
 		form.instance.perfil = self.request.user.perfil
 		return super().form_valid(form)
@@ -230,11 +245,12 @@ class PerfilDeleteView(LoginRequiredMixin, DeleteView):
 class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 	model = Post
-	success_url = reverse_lazy('Post')
+	#template_name="../paradise_app/post_confirm_detele.html"
+	success_url = reverse_lazy('inicio')
 
 class AlbumDeleteView(LoginRequiredMixin, DeleteView):
 	model = Album
-	success_url = reverse_lazy('Album')
+	success_url = reverse_lazy('inicio')
 
 class ComentariosDeleteView(LoginRequiredMixin, DeleteView):
 	model = Comentarios
@@ -255,6 +271,9 @@ def register(request):
 			usuario = form_user.save(commit=False)
 			perfil = form_perfil.save(commit=False)
 			perfil.usuario = usuario
+			#perfil.foto=request.POST['foto']
+			#foto = form_perfil.cleaned_data.get('fotoperfil')
+			#perfil.foto = foto
 			#email = form_user.cleaned.data.get('email')
 			#user.email = email
 			form_user.save()

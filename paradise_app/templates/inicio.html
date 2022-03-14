@@ -34,7 +34,7 @@
 <style>
   body {
   background-image: url('../static/paradise_app/imagenes/98495-puesta-tropicos-sica-ilustracion-4500x3000.jpg');
-  background-repeat: no-repeat;
+  background-repeat: yes-repeat;
   }
 
 </style>
@@ -51,7 +51,7 @@
               <div class="left-col">
                   <div class="post">
                       <div class="info">
-                        <a href="">
+                        <a href="{% url 'Perfil-detalles' post.perfil_id %}">
                           <div class="user">
                               <div class="profile-pic"><img src="/media/{{ post.perfil.foto }}" alt=""></div>
                               <p class="username">{{ post.perfil }}</p>
@@ -71,11 +71,22 @@
                           <p class="description"><span>{{ post.perfil }}</span>{{ post.descripcion }}</p>
                           <p class="post-time">{{ post.time }}</p>
                       </div>
-                      <div class="comment-wrapper">
-                          <img src="img/smile.PNG" class="icon" alt="">
-                          <input type="text" class="comment-box" placeholder="Añadir comentario">
-                          <button class="comment-btn">+</button>
-                      </div>
+                      <div>
+                    <h7><b>Valoraciones:</b></h7>
+                    {% for valo in post.valoracion_set.all %}
+                        <li>{{ valo.perfil }}: {{ valo.estrella }}</li>
+                    {% endfor %}
+                    
+                </div>
+                <div>
+                    <h7><b>Comentarios:</b></h7>
+                    {% for come in post.comentarios_set.all %}
+
+                        <li>{{ come.perfil}}: {{come.coment}}</li>
+
+                    {% endfor %}
+                </div>
+                      
                       </div>
 
                   </div>
@@ -90,3 +101,8 @@
 
 
 {% endblock %}
+<!--<div class="comment-wrapper">
+                          <img src="img/smile.PNG" class="icon" alt="">
+                          <input type="text" class="comment-box" placeholder="Añadir comentario">
+                          <button class="comment-btn">+</button>
+                      </div>-->

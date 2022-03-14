@@ -2,18 +2,18 @@
 
 {% block content %}
 <br><br><br>
-{% if user == post.user %}
+{% if user.perfil.pk == post.perfil_id %}
   <div>
   	<h2>Estás seguro de eliminar {{ post.name }}?</h2>
     <form action="" method="POST">
       {% csrf_token %}
 
       <button type="submit">Si, acepto</button>
-      <a href="{% url 'Post' %}">Cancelar</a>
+      <a href="{% url 'Post' post.id %}">Cancelar</a>
     </form>
   </div>
 {% else %}
-<h2>No puedes eliminar porque no eres el propietario <a href="{% url 'Post' %}">Volver</a></h2>
+<h2>No puedes eliminar porque no eres el propietario <a href="{% url 'Post' post.id %}">Volver</a></h2>
 
 {% endif %}
 {% endblock %}

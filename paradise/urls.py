@@ -110,13 +110,13 @@ urlpatterns = [
     path('album/<int:pk>/', AlbumDetailView.as_view(), name='Album-detalles'),
     path('album/<int:pk>/detele', AlbumDeleteView.as_view(), name='Album-delete'),
     path('album/<int:pk>/update', AlbumUpdateView.as_view(), name='Album-update'),
-    path('albumes/', AlbumView.as_view(), name='Album'),
+    path('albumes/<int:pk>/', AlbumView.as_view(), name='Album'),
     path('albumes/add', AlbumCreate.as_view(), name='Album-create'),
 
     path('publicacion/<int:pk>/', PostDetailView.as_view(), name='Post-detalles'),
     path('publicacion/<int:pk>/delete', PostDeleteView.as_view(), name='post-delete'),
     path('publicacion/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
-    path('publicaciones/', PostView.as_view(), name='Post'),
+    path('publicaciones/<int:pk>/', PostView.as_view(), name='Post'),
     path('publicaciones/add', PostCreate.as_view(), name='Post-create'),
 
 
@@ -137,6 +137,6 @@ urlpatterns = [
 
 
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

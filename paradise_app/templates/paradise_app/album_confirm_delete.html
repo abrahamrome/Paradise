@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+{% if user.perfil.pk == album.perfil_id %}
+  <div>
+  	<h2>Estás seguro de eliminar {{ album.nombre }}?</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+
+      <button type="submit">Si, acepto</button>
+      <a href="{% url 'Album' album.id %}">Cancelar</a>
+    </form>
+  </div>
+{% else %}
+<h2>No puedes eliminar porque no eres el propietario <a href="{% url 'Album' album.id %}">Volver</a></h2>
+
+{% endif %}
+{% endblock %}
