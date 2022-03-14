@@ -111,7 +111,7 @@ class ComentariosDetailView(LoginRequiredMixin, DetailView):
 class PerfilCreate(LoginRequiredMixin, CreateView):
 	model = Perfil
 	form_class = PerfilForm
-	success_url = reverse_lazy('Perfil')
+	success_url = reverse_lazy('inicio')
 
 class PostCreate(LoginRequiredMixin, CreateView):
 	model = Post
