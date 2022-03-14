@@ -27,7 +27,7 @@ from django.contrib.auth.decorators import permission_required
 
 from paradise_app.views import PerfilView, AlbumView, PostView, ComentariosView, ValoracionView, ValoracionDetailView, ComentariosDetailView, inicio, AlbumDetailView, PostDetailView
 from paradise_app.views import PerfilCreate, PostCreate, ComentariosCreate, ValoracionCreate, AlbumCreate, PerfilUpdateView, PostUpdateView, AlbumUpdateView, ComentariosUpdateView, ValoracionUpdateView
-from paradise_app.views import PerfilDeleteView, PostDeleteView, AlbumDeleteView, ComentariosDeleteView, ValoracionDeleteView, inicio, register, search, PerfilDetailView
+from paradise_app.views import PerfilDeleteView, PostDeleteView, AlbumDeleteView, ComentariosDeleteView, ValoracionDeleteView, inicio, register, search, PerfilDetailView, cookies
 
 #-----------------API--------------------------------------
 
@@ -133,6 +133,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path(r'openid/', include('django_openid_auth.urls')),
     path('accounts/', include('allauth.urls')),
+    path('cookies/', cookies.as_view(), name='cookies')
 
     #path(r'auth/', include('googleauth.urls')),
 

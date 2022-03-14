@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-r-#_do2@z0@pb*cg4)(1iegj#o1k#^k^(e1%12qema6$!1j*2p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '10.1.2.131']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '10.1.2.131', '192.168.1.135']
 
 
 # Application definition
@@ -183,6 +183,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': [
             'profile',
             'email',
+            
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',

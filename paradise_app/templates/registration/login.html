@@ -76,7 +76,8 @@
             <p><a href="{% url 'password_reset' %}" style="color:white;">No me acuerdo de la contraseña</a></p>
             <p><a href="{% url 'openid-login' %}" style="color:white;">Inicia sesion sin registrarte</a></p>
             <p>
-                <a href="https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=1026685614512-b6tf2t8q40a4fhafb8cr7d3asqv72uu0.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=email%20profile&response_type=code&state=3cJKL2krYk8v&access_type=online&flowName=GeneralOAuthFlow">
+                {% load socialaccount %}
+                <a href="{% provider_login_url 'google' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16" color="white">
                         <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"></path>
                     </svg>

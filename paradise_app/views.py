@@ -298,3 +298,5 @@ def search(request):
 
 
 
+class cookies(TemplateView):
+	template_name='paradise_app/aviso-cookies.html'
