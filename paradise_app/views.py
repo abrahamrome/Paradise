@@ -271,7 +271,7 @@ def register(request):
 			usuario = form_user.save(commit=False)
 			perfil = form_perfil.save(commit=False)
 			perfil.usuario = usuario
-			#perfil.foto=request.POST['foto']
+			perfil.foto=request.FILES['foto']
 			#foto = form_perfil.cleaned_data.get('fotoperfil')
 			#perfil.foto = foto
 			#email = form_user.cleaned.data.get('email')

@@ -131,7 +131,9 @@ urlpatterns = [
 
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path(r'openid/', include('django_openid_auth.urls'), name='openid'),
+    path(r'openid/', include('django_openid_auth.urls')),
+    path('accounts/', include('allauth.urls')),
+
     #path(r'auth/', include('googleauth.urls')),
 
 

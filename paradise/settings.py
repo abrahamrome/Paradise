@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_google_maps',
     'django_openid_auth',
-    'googleauth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
 ]
 
@@ -160,6 +163,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SITE_ID = 3
+
 OPENID_CREATE_USERS = True
 OPENID_UPDATE_DETAILS_FROM_SREG = True
 OPENID_SSO_SERVER_URL = 'https://login.launchpad.net/'
@@ -168,28 +175,43 @@ AUTHENTICATION_BACKENDS = (
             'django_openid_auth.auth.OpenIDBackend',
             'django.contrib.auth.backends.ModelBackend',
             'googleauth.backends.GoogleAuthBackend',
+            'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+
+
 # client ID from the Google Developer Console
-GOOGLEAUTH_CLIENT_ID = '1026685614512-b6tf2t8q40a4fhafb8cr7d3asqv72uu0.apps.googleusercontent.com'
+#GOOGLEAUTH_CLIENT_ID = '1026685614512-b6tf2t8q40a4fhafb8cr7d3asqv72uu0.apps.googleusercontent.com'
 
 # client secret from the Google Developer Console
-GOOGLEAUTH_CLIENT_SECRET = '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'
+#GOOGLEAUTH_CLIENT_SECRET = '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'
 
 # your app's domain, used to construct callback URLs
-GOOGLEAUTH_CALLBACK_DOMAIN = ''
+#GOOGLEAUTH_CALLBACK_DOMAIN = ''
 
 # callback URL uses HTTPS (your side, not Google), default True
-GOOGLEAUTH_USE_HTTPS = False
+#GOOGLEAUTH_USE_HTTPS = False
 
 # restrict to the given Google Apps domain, default None
-GOOGLEAUTH_APPS_DOMAIN = ''
+#GOOGLEAUTH_APPS_DOMAIN = ''
 
 # get user's name, default True (extra HTTP request)
-GOOGLEAUTH_GET_PROFILE = True
+#GOOGLEAUTH_GET_PROFILE = True
 
 # sets value of user.is_staff for new users, default False
-GOOGLEAUTH_IS_STAFF = False
+#GOOGLEAUTH_IS_STAFF = False
 
 # list of default group names to assign to new users
-GOOGLEAUTH_GROUPS = []
+#GOOGLEAUTH_GROUPS = []

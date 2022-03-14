@@ -8,18 +8,13 @@
 
 <br><br><br>
 
-<form method="post">
+<form enctype="multipart/form-data" method="post">
 	{% csrf_token %}
-	{{ form_user.as_p }}
 	{{ form_perfil.as_p }}
+	{{ form_user.as_p }}
 
 
 	<button type="submit">Registrarse</button>	
-
-
-
-
-
 
 
 
